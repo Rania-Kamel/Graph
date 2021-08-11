@@ -59,8 +59,7 @@ function App() {
    
       width: 40px;
       margin: 0 10px;
-      
-      animation : move${index} 1s linear;
+      animation : move${index} .7s linear;
       @keyframes move${index} {
         from {height: 0px;}
         to {height: ${score}px;}
