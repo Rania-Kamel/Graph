@@ -12,6 +12,7 @@ const data = [
 
  ]
 
+
 function App() {
 
   const [AddNewData , setAddNewData] = useState(data);
@@ -19,20 +20,31 @@ function App() {
   
   const style = css`
   
+    
     margin: auto;
     width: fit-content;
-    height: 220px;
-    margin-top: calc(50vh - 210px);
+    height: 350px;
+    margin-top: calc(100vh - 700px);
     border-bottom: 2px solid black;
     border-left: 2px solid;
     display: flex;
-    flex-flow: wrap-reverse;
+    
+    .columnAndName{
+      display: flex;
+      flex-direction: column-reverse;
+    }
     .name{
       transform: rotate(90deg);
       font-size: 20px;
       font-style: oblique;
       font-weight: 500;
+     
+      
   } 
+  .number{
+    display: grid;
+  }
+ 
    
 
   `
@@ -40,46 +52,45 @@ function App() {
    const styling = (score , index) =>{
 
     const style = css`
-  
+   
       width: 40px;
       margin: 0 10px;
-      position: relative;
-      animation : move${index} 2.5s linear forwards;
+      
+      animation : move${index} 1s linear;
       @keyframes move${index} {
         from {height: 0px;}
         to {height: ${score}px;}
-      }
+      }  
+     
      
     `
     return style;
    }
 
+   const nummers = () => {
+   const number = []
+    for (var i = 300; i > 0; i-=50) {
+      number.push(<div style={{marginLeft: -35 }}>{i}</div>)
+    }
+    return number
+   
+  };
+
   return (
     <>
      <AddData AddNewData = {AddNewData} setAddNewData = {setAddNewData} />
-
      <div className={cx(style)}>
+    <div className="number"> {nummers()}</div>
     {AddNewData.map(({score , name} , index) => (
-     
-      
-       <div className={cx(styling(score , index))} style={{height: score , backgroundColor: "#" + score + "A"  }}>
-       <div className="score" style={{marginTop : -13 ,  marginLeft: -60*(index+1)}}>{score}</div>
-       <div className="name" style={{marginTop : score + 20  }}>{name}</div>
+     <div className="columnAndName">
+       
+       <div className={cx(styling(score , index))} style={{height: score , backgroundColor: "#" + score + "A"  }}></div>
+       <div className="name" style={{}}>{name}</div>
        </div>
-       
-       
-     
-      
-      
-      
     )
-
     )}
-    </div>
-       
+     </div>
      </>
-  
-     
   );
 }
 
